@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   Global Reset & Base Styles
+=============================== */
+html,
+body,
+#root {
+  @apply min-h-screen w-full bg-bg text-text antialiased;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+body {
+  @apply font-sans leading-relaxed;
+}
+
+* {
+  @apply box-border;
+}
+
+a {
+  @apply text-accent hover:text-gold hover:underline transition-colors duration-200;
+}
+
+img {
+  @apply max-w-full h-auto block;
+}
+
+/* Smooth scroll & polished selection */
+html {
+  scroll-behavior: smooth;
+}
+::selection {
+  @apply bg-accent text-white;
+}
+
+/* ===============================
+   Layout Containers
+=============================== */
+.container {
+  @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+}
+.container-fluid {
+  @apply w-full px-4 md:px-6 lg:px-8;
+}
+
+/* ===============================
+   Reusable Components
+=============================== */
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium
+           shadow-sm border border-slate-300 bg-white text-text
+           hover:bg-slate-100 hover:border-slate-400 transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-white border-transparent hover:bg-primary hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply border-accent text-accent hover:bg-accent hover:text-white;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white text-text rounded-2xl shadow-md border border-slate-200 overflow-hidden transition-all duration-300;
+    padding: 2em;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .card-hover {
+    @apply transform hover:-translate-y-2 hover:shadow-xl hover:border-accent;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+  }
+
+  /* Sections */
+  .section {
+    @apply py-16 md:py-24;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-heading font-bold text-center mb-6 text-primary;
+  }
+  .section-subtitle {
+    @apply text-lg md:text-xl text-slate-500 text-center mb-10;
+  }
+
+  /* Logo */
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter, transform;
+    transition: filter 300ms, transform 300ms;
+    cursor: pointer;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em var(--accent)/70);
+    transform: scale(1.05);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+
+  @keyframes logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+
+  /* Read-the-docs links */
+  .read-the-docs {
+    color: var(--text)/70;
+    transition: color 0.2s;
+  }
+  .read-the-docs:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+}
+
+/* ===============================
+   Dark Mode Overrides
+=============================== */
+.dark {
+  @apply bg-dark-bg text-dark-text;
+}
+
+.dark a {
+  @apply text-gold hover:text-accent;
+}
+
+.dark .btn {
+  @apply bg-dark-navbar text-dark-navbar-text border-dark-sidebar-bg hover:bg-dark-sidebar-bg hover:text-white;
+}
+
+.dark .btn-primary {
+  @apply bg-gold text-dark-text hover:bg-accent hover:text-white;
+}
+
+.dark .card {
+  @apply bg-dark-sidebar-bg text-dark-text border-dark-navbar;
+}
+
+.dark .section-title {
+  @apply text-gold;
+}
