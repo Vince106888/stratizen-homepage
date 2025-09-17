@@ -10,7 +10,7 @@ const AboutPage = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary to-accent text-white py-24">
+      <section className="relative bg-gradient-to-r from-primary to-accent text-white py-12">
         <div className="container text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -265,12 +265,12 @@ const AboutPage = () => {
             {[
               {
                 title: "Growing Demand",
-                text: "Over 15,000 students in our pilot market need better ways to collaborate and monetize their skills.",
+                text: "Over 8,000 students in our pilot market need better ways to collaborate and monetize their skills.",
                 icon: <TrendingUp className="w-8 h-8 text-accent mx-auto mb-3" />,
               },
               {
                 title: "Unique Platform",
-                text: "Combining peer learning, forums, and a marketplace — a first-of-its-kind hybrid model in Africa.",
+                text: "Combining peer learning, forums, and a marketplace, a first-of-its-kind hybrid model in Africa.",
                 icon: <Layers className="w-8 h-8 text-accent mx-auto mb-3" />,
               },
               {
@@ -315,14 +315,14 @@ const AboutPage = () => {
               {
                 name: " Marian B.",
                 role: "Co-Founder & Product Growth Manager",
-                img: "/images/marian.JPG",
-                link: "https://linkedin.com/in/",
+                img: "/images/mariam.png",
+                link: "https://www.linkedin.com/in/marian-bosibori-8a7593319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
               },
               {
                 name: "Samantha M.",
                 role: "Co-Founder & Vision/Strategy Lead",
-                img: "/images/sam.JPG",
-                link: "https://linkedin.com/in/",
+                img: "/images/sam.jpeg",
+                link: "https://ke.linkedin.com/in/samantha-maria-b37ba526a",
               },
             ].map((member, i) => (
               <motion.div

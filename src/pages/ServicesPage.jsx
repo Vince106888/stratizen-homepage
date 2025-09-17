@@ -78,7 +78,7 @@ const partnerServices = [
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-bg dark:bg-dark-bg text-text dark:text-dark-text">
-      <div className="max-w-7xl mx-auto px-6 py-24 text-center">
+      <div className="max-w-7xl mx-auto px-3 py-12 text-center">
         {/* Hero Intro */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -97,8 +97,8 @@ export default function ServicesPage() {
         </motion.div>
 
         {/* Student Services */}
-        <section className="mt-20">
-          <h3 className="text-3xl font-bold mb-12 text-primary dark:text-gold">
+        <section className="mt-5">
+          <h3 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
             For Students
           </h3>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -109,19 +109,19 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-dark-sidebar-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+                className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <Icon className="w-12 h-12 text-accent mb-5 mx-auto" />
+                <Icon className="w-12 h-12 text-gold mb-5 mx-auto" />
                 <h4 className="text-xl font-semibold mb-3">{title}</h4>
-                <p className="text-gray-600 dark:text-gray-300">{desc}</p>
+                <p className="opacity-90">{desc}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
         {/* Partner / Investor Services */}
-        <section className="mt-28">
-          <h3 className="text-3xl font-bold mb-12 text-primary dark:text-gold">
+        <section className="mt-5">
+          <h3 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
             For Partners & Investors
           </h3>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -132,23 +132,26 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-dark-sidebar-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+                className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <Icon className="w-12 h-12 text-accent mb-5 mx-auto" />
+                <Icon className="w-12 h-12 text-gold mb-5 mx-auto" />
                 <h4 className="text-xl font-semibold mb-3">{title}</h4>
-                <p className="text-gray-600 dark:text-gray-300">{desc}</p>
+                <p className="opacity-90">{desc}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
         {/* Impact Metrics */}
-        <section className="mt-28">
+        <section className="mt-5">
+          <h3 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
+            Roadmap to 2030 🌍
+          </h3>
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { number: "50,000+", label: "Students Empowered" },
-              { number: "1,000+", label: "Projects & Startups Launched" },
-              { number: "100+", label: "Universities in Roadmap" },
+              { number: "50,000+", label: "Students Empowered (by 2030)" },
+              { number: "1,000+", label: "Projects & Startups Launched (by 2030)" },
+              { number: "100+", label: "Universities in Roadmap (by 2030)" },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -158,11 +161,14 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
                 className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-lg"
               >
-                <h4 className="text-4xl font-extrabold mb-2">{stat.number}</h4>
+                <h4 className="text-4xl font-extrabold mb-2 text-white dark:text-gold">{stat.number}</h4>
                 <p className="text-lg">{stat.label}</p>
               </motion.div>
             ))}
           </div>
+          <p className="mt-6 text-gray-600 dark:text-gray-400 text-sm italic">
+            *These impact projections form part of our 2030 strategic roadmap.
+          </p>
         </section>
 
         {/* Call to Action */}
@@ -171,13 +177,13 @@ export default function ServicesPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mt-32 bg-gradient-to-r from-primary to-accent dark:from-dark-navbar dark:to-gold text-white py-20 px-10 rounded-3xl shadow-xl"
+          className="mt-5 bg-gradient-to-r from-primary to-accent dark:from-dark-navbar dark:to-gold text-white py-10 px-5 rounded-3xl shadow-xl"
         >
           <h3 className="text-4xl md:text-5xl font-extrabold mb-6">
-            Let’s Build the Future — Together 🌍
+            Let’s Build the Future, Together 🌍
           </h3>
           <p className="max-w-3xl mx-auto mb-10 text-lg leading-relaxed">
-            Students. Partners. Investors. Stratizen is not just a platform — it’s a{" "}
+            Students. Partners. Investors. Stratizen is not just a platform, it’s a{" "}
             <span className="font-semibold">movement</span> for redefining education, entrepreneurship, and collaboration in Africa and beyond.
           </p>
           <div className="flex justify-center gap-6 flex-wrap">

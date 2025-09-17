@@ -370,7 +370,8 @@ export default function HomePage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-card flex flex-col"
+                  className="rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 
+           bg-white dark:bg-gradient-to-br dark:from-dark-sidebar-bg dark:to-dark-bg flex flex-col"
                 >
                   {/* IMAGE TOP */}
                   <div className="relative w-full h-56 md:h-64">

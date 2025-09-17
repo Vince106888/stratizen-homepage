@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const StratizenFlow = ({ autoPlay = true, interval = 3500 }) => {
+const StratizenFlow = ({ autoPlay = true, interval = 6000, pauseOnHover = true,}) => {
   // -----------------------------
   // Data / Journey Steps
   // -----------------------------
@@ -279,15 +279,17 @@ const StratizenFlow = ({ autoPlay = true, interval = 3500 }) => {
   // State & Auto-advance
   // -----------------------------
   const [currentStep, setCurrentStep] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (!autoPlay) return;
+    if (!autoPlay || paused) return;
+
     const timer = setInterval(() => {
       setCurrentStep((prev) => (prev + 1) % journeySteps.length);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [journeySteps.length, interval, autoPlay]);
+  }, [journeySteps.length, interval, autoPlay, paused]);
 
   const step = journeySteps[currentStep];
 
@@ -300,20 +302,25 @@ const StratizenFlow = ({ autoPlay = true, interval = 3500 }) => {
   // Render
   // -----------------------------
   return (
-    <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
+    <div
+      className="relative flex flex-col items-center w-full max-w-3xl mx-auto"
+      onMouseEnter={() => pauseOnHover && setPaused(true)}
+      onMouseLeave={() => pauseOnHover && setPaused(false)}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={step.id}
           className="flex flex-col items-center bg-white dark:bg-dark-sidebar-bg p-6 md:p-8 rounded-2xl shadow-lg w-full text-center"
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.95 }}
-          transition={{ duration: 0.6 }}
+          exit={{ opacity: 0, y: -30, scale: 0.95 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
           {/* Icon */}
           <motion.div
             className={`text-5xl p-5 mb-4 ${step.iconBg} rounded-full shadow-lg`}
             whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             {step.icon}
           </motion.div>
@@ -337,7 +344,7 @@ const StratizenFlow = ({ autoPlay = true, interval = 3500 }) => {
                   className={`p-3 rounded-xl shadow ${sub.gradient} text-white flex flex-col items-center`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.15 }}
+                  transition={{ duration: 0.6, delay: idx * 0.25 }}
                 >
                   <div className="text-2xl md:text-3xl mb-1">{sub.icon}</div>
                   <h4 className="font-semibold text-sm md:text-base">{sub.title}</h4>
@@ -352,15 +359,19 @@ const StratizenFlow = ({ autoPlay = true, interval = 3500 }) => {
       <div className="absolute top-1/2 transform -translate-y-1/2 w-full flex justify-between px-4 md:px-8">
         <motion.button
           onClick={goPrev}
-          className="p-3 bg-primary/90 dark:bg-white/20 rounded-full shadow hover:bg-primary/100 transition-colors"
+          aria-label="Previous step"
+          className="p-3 bg-primary/90 dark:bg-white/20 rounded-full shadow hover:bg-primary/100 dark:hover:bg-white/30 transition-colors"
           whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.95 }}
         >
           <ChevronLeft className="text-white dark:text-black" />
         </motion.button>
         <motion.button
           onClick={goNext}
-          className="p-3 bg-primary/90 dark:bg-white/20 rounded-full shadow hover:bg-primary/100 transition-colors"
+          aria-label="Next step"
+          className="p-3 bg-primary/90 dark:bg-white/20 rounded-full shadow hover:bg-primary/100 dark:hover:bg-white/30 transition-colors"
           whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.95 }}
         >
           <ChevronRight className="text-white dark:text-black" />
         </motion.button>
@@ -369,11 +380,14 @@ const StratizenFlow = ({ autoPlay = true, interval = 3500 }) => {
       {/* Step Indicators */}
       <div className="flex space-x-2 mt-6">
         {journeySteps.map((_, idx) => (
-          <motion.div
+          <motion.button
             key={idx}
+            aria-label={`Go to step ${idx + 1}`}
             onClick={() => setCurrentStep(idx)}
-            className={`w-4 h-4 rounded-full cursor-pointer ${
-              idx === currentStep ? "bg-primary" : "bg-gray-400 dark:bg-gray-600"
+            className={`w-4 h-4 rounded-full ${
+              idx === currentStep
+                ? "bg-primary dark:bg-yellow-400"
+                : "bg-gray-400 dark:bg-gray-600"
             }`}
             whileHover={{ scale: 1.3 }}
             transition={{ duration: 0.3 }}
