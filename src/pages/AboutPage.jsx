@@ -1,9 +1,12 @@
 // src/pages/AboutPage.jsx
-import React from "react";
-import { motion } from "framer-motion";
+import React, {useRef, useEffect } from "react";
+import { useInView, useAnimation, motion } from "framer-motion";
 import { TrendingUp, Layers, Globe } from "lucide-react";
+import Tilt from "react-parallax-tilt";
+import StratizenFlow from "../components/StratizenFlow";
 
 const AboutPage = () => {
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -18,43 +21,235 @@ const AboutPage = () => {
             Empowering Students. Unlocking Potential.
           </motion.h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl opacity-90">
-            Stratizen is building the future of student collaboration —
-            connecting learning, innovation, and opportunity on a single
+            Stratizen is building the future of student collaboration.
+            Connecting learning, innovation, and opportunity on a single
             platform.
           </p>
         </div>
       </section>
 
-      {/* Mission & Story */}
-      <section className="section bg-bg dark:bg-dark-bg">
-        <div className="container grid md:grid-cols-2 gap-12 items-center">
-          <motion.img
-            src="/images/about.jpg"
-            alt="Students collaborating through Stratizen platform"
-            className="rounded-2xl shadow-xl"
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-          />
-          <div>
-            <h2 className="section-title text-left">Our Mission</h2>
-            <p className="text-lg mb-6">
-              At Stratizen, we believe that students are the heartbeat of
-              innovation. Our mission is to provide a{" "}
-              <span className="font-semibold">peer-driven platform</span> where
-              they can collaborate, learn, trade, and grow — both academically
-              and entrepreneurially.
-            </p>
-            <p className="text-lg">
-              Founded at Strathmore University, Stratizen is more than just a
-              platform: it’s a{" "}
-              <span className="font-semibold">movement to decentralize education</span>, foster
-              student-led innovation, and create scalable opportunities across
-              Africa and beyond.
-            </p>
+      {/* Mission, Vision, Values & Story */}
+      <section className="bg-bg dark:bg-dark-bg pt-5 pb-5">
+        <div className="container space-y-4 md:space-y-5">
+          {[
+            {
+              title: "Our Mission",
+              desc: `Stratizen empowers students with a peer-driven, pan-African platform 
+              to collaborate, innovate, and commercialize ideas academically and entrepreneurially. 
+              By connecting learning, innovation, and opportunity, we ensure that no student talent goes untapped.`,
+              img: "/images/mission.jpg",
+              gradient: "bg-gradient-to-r from-primary to-accent", // Navy → Red
+            },
+            {
+              title: "Our Vision",
+              desc: `To become Africa’s leading student ecosystem by 2030 decentralized-ready, privacy-first, and globally impactful.
+              Connecting 50,000+ students and 100+ universities, 
+              we aim to redefine the standard for student collaboration, innovation, and opportunity across the continent.`,
+              img: "/images/vision.jpg",
+              gradient: "bg-gradient-to-r from-accent to-gold", // Red → Gold
+            },
+            {
+              title: "Our Core Beliefs",
+              desc: `We operate on three guiding principles:
+              • Excellence without barriers: Talent exists everywhere; opportunity must too.
+              • Innovation starts at home: Africa’s future is built by bold action today.
+              • Students as co-architects: Learners aren’t just beneficiaries, they design the future we deserve.`,
+              img: "/images/values.jpg",
+              gradient: "bg-gradient-to-r from-primary to-gold", // Navy → Gold
+            },
+            {
+              title: "Our Story & Approach",
+              desc: `Founded at Strathmore University, Stratizen is a constructive roadmap not a critique.
+              We partner with faculty, administrators, alumni, and students to pilot high-impact initiatives, empower student-led innovation, and co-create a legacy that balances tradition with transformation. 
+              Together, we ensure Africa’s future leaders thrive.`,
+              img: "/images/story.webp",
+              gradient: "bg-gradient-to-r from-accent to-primary", // Red → Navy
+            },
+          ].map((card, idx) => (
+            <Tilt
+              key={idx}
+              glareEnable={true}
+              glareMaxOpacity={0.25}
+              scale={1.05}
+              perspective={1000}
+              transitionSpeed={400}
+              className="cursor-pointer"
+            >
+              <motion.div
+                className={`grid md:grid-cols-2 gap-2 md:gap-3 rounded-2xl shadow-card overflow-hidden ${card.gradient} text-white`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.03 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+              >
+                {/* Image */}
+                <img
+                  src={card.img}
+                  alt={card.title}
+                  className="w-full h-48 md:h-auto object-cover md:rounded-l-2xl"
+                />
+
+                {/* Text */}
+                <div className="p-4 md:p-6 flex flex-col justify-center">
+                  <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2 md:mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-base md:text-lg leading-relaxed whitespace-pre-line">
+                    {card.desc}
+                  </p>
+                </div>
+              </motion.div>
+            </Tilt>
+          ))}
+        </div>
+      </section>
+
+      {/* Problem & Opportunity */}
+      <section className="section bg-bg dark:bg-dark-bg py-8 md:py-5">
+        <div className="container space-y-12">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <motion.h2
+              className="text-4xl md:text-5xl font-heading font-bold text-primary dark:text-white"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              The Problem & Opportunity
+            </motion.h2>
+            <motion.p
+              className="text-lg md:text-xl text-text dark:text-dark-text opacity-90"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Higher education is fragmented and students often face missed opportunities. Stratizen bridges gaps, 
+              creates visibility, and empowers students to learn, collaborate, and earn.
+            </motion.p>
+          </div>
+
+          {/* Problem & Opportunity Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {[
+              {
+                title: "Fragmented Learning",
+                desc: `Students often struggle to find peers, mentors, and relevant resources in one place. 
+                Knowledge and collaboration are scattered, making it harder to build projects and solve real problems.`,
+                img: "/images/problem1.jpg",
+                gradient: "bg-gradient-to-r from-primary to-accent",
+                icon: "📚",
+              },
+              {
+                title: "Limited Monetization & Recognition",
+                desc: `Many students' skills, tutoring, and projects go unnoticed. 
+                Stratizen creates a marketplace where students can showcase their talent, monetize services, and earn recognition.`,
+                img: "/images/problem2.png",
+                gradient: "bg-gradient-to-r from-accent to-gold",
+                icon: "💰",
+              },
+              {
+                title: "Sparse Mentorship & Guidance",
+                desc: `Access to mentors and advisors is inconsistent. Stratizen connects students with industry experts, alumni, and advisors, 
+                providing structured guidance and growth opportunities.`,
+                img: "/images/problem3.jpg",
+                gradient: "bg-gradient-to-r from-primary to-gold",
+                icon: "🧭",
+              },
+              {
+                title: "Disconnected Campus Ecosystems",
+                desc: `Universities often operate in silos, limiting collaboration. Stratizen bridges campuses across Africa, 
+                fostering cross-institution projects, innovation hubs, and pan-African student networks.`,
+                img: "/images/problem4.jpg",
+                gradient: "bg-gradient-to-r from-accent to-primary",
+                icon: "🌍",
+              },
+              {
+                title: "Knowledge Organization Gap",
+                desc: `Traditional education rarely teaches students how to systematically organize and apply their knowledge. 
+                Stratizen equips learners with tools to structure information, plan projects, and turn ideas into results.`,
+                img: "/images/problem5.jpg",
+                gradient: "bg-gradient-to-r from-indigo-700 to-primary",
+                icon: "🗂️",
+              },
+              {
+                title: "True Educated Leadership",
+                desc: `An educated individual is one who can achieve any goal without selfishness. Stratizen nurtures ethical problem-solvers, 
+                empowering students to create impact while respecting shared resources and community values.`,
+                img: "/images/problem6.jpg",
+                gradient: "bg-gradient-to-r from-green-700 to-gold",
+                icon: "🎓",
+              },
+            ].map((card, idx) => (
+              <Tilt
+                key={idx}
+                glareEnable={true}
+                glareMaxOpacity={0.15}
+                scale={1.05}
+                transitionSpeed={400}
+                className="cursor-pointer h-full"
+              >
+                <motion.div
+                  className={`flex flex-col h-full rounded-2xl shadow-card overflow-hidden ${card.gradient} text-white`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.03 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                >
+                  {/* Image / Icon */}
+                  <div className="relative w-full aspect-[4/3]">
+                    <img
+                      src={card.img}
+                      alt={card.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4 text-4xl md:text-5xl">{card.icon}</div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="p-6 md:p-8 flex flex-col flex-grow justify-between">
+                    <h3 className="text-2xl md:text-3xl font-heading font-bold mb-3 md:mb-4">
+                      {card.title}
+                    </h3>
+                    <p className="text-base md:text-lg leading-relaxed whitespace-pre-line flex-grow">
+                      {card.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              </Tilt>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Stratizen Ecosystem & User Journey */}
+      <section className="section bg-bg dark:bg-dark-bg py-10 relative">
+        <div className="container flex flex-col items-center space-y-8 md:space-y-12 relative">
+          {/* Section Header */}
+          <motion.div
+            className="text-center max-w-3xl space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary dark:text-white">
+              How Stratizen Works
+            </h2>
+            <p className="text-base md:text-lg text-text dark:text-dark-text opacity-90">
+              Follow the user journey step by step and see what happens at each stage.
+            </p>
+          </motion.div>
+
+          {/* Animated Flow Card */}
+          <div className="relative w-full max-w-3xl">
+            <StratizenFlow />
+          </div>
+        </div>
+      </section>
+
 
       {/* Traction / Value Proposition */}
       <section className="section bg-white dark:bg-dark-sidebar-bg">
@@ -113,9 +308,21 @@ const AboutPage = () => {
             {[
               {
                 name: "Vince N.",
-                role: "Founder & Vision Lead",
+                role: "Founder & Product Engineering Lead",
                 img: "/images/vincent.JPG",
-                link: "https://linkedin.com/in/your-link", // replace with actual
+                link: "https://linkedin.com/in/vincent-nyamao",
+              },
+              {
+                name: " Marian B.",
+                role: "Co-Founder & Product Growth Manager",
+                img: "/images/marian.JPG",
+                link: "https://linkedin.com/in/",
+              },
+              {
+                name: "Samantha M.",
+                role: "Co-Founder & Vision/Strategy Lead",
+                img: "/images/sam.JPG",
+                link: "https://linkedin.com/in/",
               },
             ].map((member, i) => (
               <motion.div
