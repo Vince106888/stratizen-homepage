@@ -314,13 +314,13 @@ const AboutPage = () => {
               },
               {
                 name: " Marian B.",
-                role: "Co-Founder & Product Growth Manager",
+                role: "Co-Founder & Vision/Strategy Lead",
                 img: "/images/mariam.png",
                 link: "https://www.linkedin.com/in/marian-bosibori-8a7593319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
               },
               {
                 name: "Samantha M.",
-                role: "Co-Founder & Vision/Strategy Lead",
+                role: "Co-Founder & Product Growth Manager",
                 img: "/images/sam.jpeg",
                 link: "https://ke.linkedin.com/in/samantha-maria-b37ba526a",
               },

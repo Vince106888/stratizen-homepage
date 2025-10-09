@@ -70,24 +70,26 @@ export default function ContactPage() {
               Strathmore University, Ole Sangale Rd, Nairobi, Kenya
             </p>
           </div>
-
-          <p className="mt-6 text-sm text-gray-300 italic">
-            💡 We usually reply within 24 hours
-          </p>
-
+          
           {/* Google Map */}
           <div className="mt-10 rounded-xl overflow-hidden shadow-lg border border-white/10">
             <iframe
               title="Strathmore Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.820196397088!2d36.80652391475401!3d-1.3104345990500206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10f59b9c2d6f%3A0x28c7d53d437cc7e6!2sStrathmore%20University!5e0!3m2!1sen!2ske!4v1695052832936!5m2!1sen!2ske"
-              width="100%"
-              height="250"
-              style={{ border: 0 }}
-              allowFullScreen=""
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.777173820346!2d36.80946901083484!3d-1.3089601986730983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f112e9eff4827%3A0x17a918597484c8ea!2sStrathmore%20University!5e0!3m2!1sen!2ske!4v1758160282787!5m2!1sen!2ske"
+              width="600"
+              height="220"
+              allowfullscreen=""
               loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              style={{ border: 0 }}
             ></iframe>
           </div>
+
+          <p className="mt-6 text-sm text-gray-300 italic">
+            💡 We usually reply within 24 hours
+          </p>
         </motion.div>
+
 
         {/* ================= RIGHT SIDE: CONTACT FORM ================= */}
         <motion.form
