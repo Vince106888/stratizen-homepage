@@ -30,8 +30,8 @@ export default {
         "dark-dropdown-bg": "rgba(40,40,60,0.95)",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"], // Clean UI font
-        heading: ["Poppins", "sans-serif"],         // Accent headings
+        sans: ["Manrope", "system-ui", "sans-serif"],
+        heading: ["Space Grotesk", "Manrope", "sans-serif"],
       },
       boxShadow: {
         card: "0 4px 14px rgba(0, 0, 0, 0.1)",       // Subtle card shadow

@@ -1,9 +1,29 @@
 // src/pages/ContactPage.jsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import SEO from "../components/SEO";
+import { siteConfig } from "../config/siteConfig";
+import { trackEvent } from "../utils/analytics";
+import { getWhatsAppLink } from "../utils/whatsapp";
+
+const MotionDiv = motion.div;
+const MotionForm = motion.form;
+const MotionInput = motion.input;
+const MotionTextarea = motion.textarea;
+const MotionButton = motion.button;
 
 export default function ContactPage() {
-  const [toast, setToast] = useState(null); // { type: "success" | "error", message: string }
+  const [toast, setToast] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("success") === "true") {
+      setToast({ type: "success", message: "Message sent successfully." });
+      setTimeout(() => setToast(null), 4000);
+    }
+  }, [location.search]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,44 +31,57 @@ export default function ContactPage() {
 
     try {
       const formData = new FormData(form);
-      await fetch("/", {
+      const body = new URLSearchParams(formData).toString();
+      const response = await fetch("/", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
       });
 
-      setToast({ type: "success", message: "✅ Message sent successfully!" });
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      trackEvent("contact_submit_success", { location: "contact_page" });
+      setToast({ type: "success", message: "Message sent successfully." });
       form.reset();
 
-      // Hide toast after 4s
       setTimeout(() => setToast(null), 4000);
-    } catch (err) {
-      setToast({ type: "error", message: "❌ Something went wrong. Try again." });
+    } catch (error) {
+      console.error(error);
+      trackEvent("contact_submit_error", { location: "contact_page" });
+      setToast({ type: "error", message: "Something went wrong. Try again." });
       setTimeout(() => setToast(null), 4000);
     }
   };
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-primary via-accent/90 to-primary px-6 py-24 text-white relative">
+      <SEO
+        title="Contact"
+        description="Contact Stratizen to explore student collaboration and campus partnership opportunities."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contact Stratizen",
+          url: `${siteConfig.siteUrl}/contact`,
+        }}
+      />
       <div className="max-w-6xl mx-auto grid gap-16 md:grid-cols-2 items-start">
-        
-        {/* ================= LEFT SIDE ================= */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-heading font-bold leading-tight">
-            Let’s Build the Future <span className="text-gold">Together</span>
-          </h2>
+          <h1 className="text-4xl md:text-5xl font-heading font-bold leading-tight">
+            Let's build the future <span className="text-gold">together</span>
+          </h1>
           <p className="mt-6 text-lg text-gray-200 max-w-lg">
-            Whether you’re a <span className="font-semibold">student</span>,{" "}
-            <span className="font-semibold">mentor</span>, or{" "}
-            <span className="font-semibold">investor</span>, Stratizen welcomes
-            you to connect with us. Let’s co-create opportunities that truly
-            matter.
+            Whether you are a student, mentor, or institutional partner, we are
+            ready to collaborate. Submissions are received securely and reviewed
+            within 24 hours.
           </p>
 
-          {/* Contact Info */}
           <div className="mt-10 space-y-4 text-lg">
             <p>
               <span className="font-semibold text-gold">Email:</span>{" "}
@@ -56,7 +89,7 @@ export default function ContactPage() {
                 href="mailto:info@stratizen.edu"
                 className="underline hover:text-white"
               >
-                vincent.nyamao@stratizen.edu
+                info@stratizen.edu
               </a>
             </p>
             <p>
@@ -70,50 +103,50 @@ export default function ContactPage() {
               Strathmore University, Ole Sangale Rd, Nairobi, Kenya
             </p>
           </div>
-          
-          {/* Google Map */}
+
           <div className="mt-10 rounded-xl overflow-hidden shadow-lg border border-white/10">
             <iframe
-              title="Strathmore Location"
+              title="Strathmore University Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.777173820346!2d36.80946901083484!3d-1.3089601986730983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f112e9eff4827%3A0x17a918597484c8ea!2sStrathmore%20University!5e0!3m2!1sen!2ske!4v1758160282787!5m2!1sen!2ske"
               width="600"
               height="220"
-              allowfullscreen=""
+              allowFullScreen
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerPolicy="no-referrer-when-downgrade"
               style={{ border: 0 }}
             ></iframe>
           </div>
 
           <p className="mt-6 text-sm text-gray-300 italic">
-            💡 We usually reply within 24 hours
+            We usually reply within 24 hours.
           </p>
-        </motion.div>
+        </MotionDiv>
 
-
-        {/* ================= RIGHT SIDE: CONTACT FORM ================= */}
-        <motion.form
+        <MotionForm
           name="contact"
           method="POST"
+          action="/contact?success=true"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          onSubmit={handleSubmit} // 🔹 JS handler
+          onSubmit={handleSubmit}
           className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 text-gray-900 relative"
         >
-          {/* Hidden form-name input */}
           <input type="hidden" name="form-name" value="contact" />
           <p className="hidden">
             <label>
-              Don’t fill this out: <input name="bot-field" />
+              Do not fill this out: <input name="bot-field" />
             </label>
           </p>
 
-          <h3 className="text-2xl font-heading font-semibold mb-6 text-center text-primary">
-            Send Us a Message
-          </h3>
+          <h2 className="text-2xl font-heading font-semibold mb-6 text-center text-primary">
+            Send us a message
+          </h2>
           <div className="space-y-5">
             <div>
-              <motion.input
+              <label htmlFor="name" className="sr-only">
+                Your name
+              </label>
+              <MotionInput
                 id="name"
                 name="name"
                 type="text"
@@ -124,7 +157,10 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <motion.input
+              <label htmlFor="email" className="sr-only">
+                Your email
+              </label>
+              <MotionInput
                 id="email"
                 name="email"
                 type="email"
@@ -135,7 +171,10 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <motion.textarea
+              <label htmlFor="message" className="sr-only">
+                Your message
+              </label>
+              <MotionTextarea
                 id="message"
                 name="message"
                 rows="5"
@@ -145,17 +184,30 @@ export default function ContactPage() {
               />
             </div>
 
-            <motion.button
+            <MotionButton
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-accent text-white font-semibold py-3 rounded-xl shadow-md hover:bg-primary hover:shadow-lg transition"
             >
-              Send Message
-            </motion.button>
+              Send message
+            </MotionButton>
           </div>
 
-          {/* ================= TOAST NOTIFICATION ================= */}
+          <div className="mt-6 text-sm text-gray-600" aria-live="polite">
+            Prefer WhatsApp?{" "}
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:text-gold font-semibold"
+              onClick={() => trackEvent("whatsapp_click", { location: "contact_inline" })}
+            >
+              Chat with us instantly
+            </a>
+            .
+          </div>
+
           {toast && (
             <div
               className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg text-sm font-medium shadow-lg ${
@@ -167,22 +219,21 @@ export default function ContactPage() {
               {toast.message}
             </div>
           )}
-        </motion.form>
+        </MotionForm>
       </div>
 
-      {/* ================= EXTRA CTA ================= */}
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="text-center mt-24"
       >
-        <h3 className="text-2xl font-heading font-bold">
+        <h2 className="text-2xl font-heading font-bold">
           Ready to <span className="text-gold">partner</span> with us?
-        </h3>
+        </h2>
         <p className="mt-3 text-gray-200 max-w-2xl mx-auto">
-          Let’s create impact together. Join Stratizen and shape the next
+          Let's create impact together. Join Stratizen and help shape the next
           generation of education, entrepreneurship, and innovation.
         </p>
 
@@ -191,16 +242,17 @@ export default function ContactPage() {
             href="/about"
             className="px-6 py-3 rounded-xl bg-white text-primary font-semibold shadow hover:bg-gray-100 transition"
           >
-            Learn More
+            Learn more
           </a>
           <a
             href="/join"
             className="px-6 py-3 rounded-xl bg-accent text-white font-semibold shadow hover:bg-primary transition"
           >
-            Join Us
+            Join the waitlist
           </a>
         </div>
-      </motion.div>
+      </MotionDiv>
     </section>
   );
 }
+

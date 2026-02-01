@@ -10,67 +10,71 @@ import {
   Globe,
   Rocket,
   Network,
-  BookOpen,
   Handshake,
 } from "lucide-react";
+import SEO from "../components/SEO";
+import { siteConfig } from "../config/siteConfig";
+
+const MotionDiv = motion.div;
+const MotionSection = motion.section;
 
 const studentServices = [
   {
-    title: "Peer-to-Peer Learning",
-    desc: "Join study hubs, mentorship spaces, and knowledge-sharing communities tailored for growth.",
+    title: "Peer learning",
+    desc: "Study hubs, mentorship spaces, and knowledge-sharing communities.",
     icon: Users,
   },
   {
-    title: "Marketplace",
-    desc: "Promote your skills, services, or student-run businesses to the Stratizen ecosystem.",
+    title: "Campus marketplace",
+    desc: "Promote skills, services, or student-run businesses responsibly.",
     icon: ShoppingBag,
   },
   {
-    title: "Innovation Hub",
-    desc: "Turn bold ideas into ventures with DAOs, hackathons, and cross-campus collaborations.",
+    title: "Innovation hub",
+    desc: "Turn ideas into ventures with collaboration and support.",
     icon: Rocket,
   },
   {
-    title: "Community & Support",
-    desc: "Connect in forums, join societies, and access anonymous peer support when you need it.",
+    title: "Community support",
+    desc: "Connect in forums and access peer-led support when needed.",
     icon: MessageSquare,
   },
   {
-    title: "Career & Opportunities",
-    desc: "Find internships, jobs, and projects through trusted partnerships and alumni networks.",
+    title: "Career pathways",
+    desc: "Access internships and projects through trusted partners.",
     icon: Briefcase,
   },
   {
-    title: "Global Exposure",
-    desc: "Access international exchanges, competitions, and communities beyond your campus.",
+    title: "Global exposure",
+    desc: "Discover exchanges, competitions, and opportunities beyond campus.",
     icon: Globe,
   },
 ];
 
 const partnerServices = [
   {
-    title: "Invest in Student Startups",
-    desc: "Gain early access to ventures and disruptive innovations emerging from campuses.",
+    title: "Student startup access",
+    desc: "Engage early with ventures and campus innovation pipelines.",
     icon: GraduationCap,
   },
   {
-    title: "Recruitment & Talent Access",
-    desc: "Tap into a pool of ambitious, skilled students ready for internships and careers.",
+    title: "Talent discovery",
+    desc: "Connect with students ready for internships and entry roles.",
     icon: Network,
   },
   {
-    title: "Partnership Opportunities",
-    desc: "Collaborate with Stratizen to co-create projects, research, and scalable innovations.",
+    title: "Institutional partnerships",
+    desc: "Co-create projects, research, and coordinated programs.",
     icon: Building,
   },
   {
-    title: "CSR & Impact Programs",
-    desc: "Support digital inclusion, sustainability, and education-driven initiatives across Africa.",
+    title: "CSR and impact",
+    desc: "Support digital inclusion, sustainability, and youth development.",
     icon: Handshake,
   },
   {
-    title: "Global Ecosystem",
-    desc: "Be part of a decentralized, student-driven movement shaping the future of work & learning.",
+    title: "Global ecosystem",
+    desc: "Join a coordinated network of universities and partners.",
     icon: Globe,
   },
 ];
@@ -78,130 +82,144 @@ const partnerServices = [
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-bg dark:bg-dark-bg text-text dark:text-dark-text">
+      <SEO
+        title="Services"
+        description="Services for students, institutional partners, and collaborators supporting the Stratizen pilot."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Stratizen Services",
+          url: `${siteConfig.siteUrl}/services`,
+        }}
+      />
       <div className="max-w-7xl mx-auto px-3 py-12 text-center">
-        {/* Hero Intro */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="mb-16"
+          className="mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-heading font-extrabold text-primary dark:text-gold">
-            Services That Empower 🚀
+          <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-primary dark:text-gold">
+            Services for students and partners
           </h1>
           <p className="mt-6 text-lg md:text-xl max-w-4xl mx-auto text-gray-600 dark:text-gray-300 leading-relaxed">
-            Stratizen is where <span className="text-accent font-semibold">students</span> grow,{" "}
-            <span className="text-accent font-semibold">partners</span> innovate, and{" "}
-            <span className="text-accent font-semibold">investors</span> discover the next big wave of talent and startups.
+            Stratizen supports students, faculty, and collaborators with tools
+            that make campus coordination, learning, and opportunity easier to
+            access.
           </p>
-        </motion.div>
+        </MotionDiv>
 
-        {/* Student Services */}
-        <section className="mt-5">
-          <h3 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
-            For Students
-          </h3>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {studentServices.map(({ title, desc, icon: Icon }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <Icon className="w-12 h-12 text-gold mb-5 mx-auto" />
-                <h4 className="text-xl font-semibold mb-3">{title}</h4>
-                <p className="opacity-90">{desc}</p>
-              </motion.div>
-            ))}
+        <section id="students" className="mt-10">
+          <h2 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
+            For students
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {studentServices.map((service) => {
+              const Icon = service.icon;
+              return (
+                <MotionDiv
+                  key={service.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  whileHover={{ scale: 1.03 }}
+                  className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  <Icon className="w-12 h-12 text-gold mb-5 mx-auto" />
+                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                  <p className="opacity-90">{service.desc}</p>
+                </MotionDiv>
+              );
+            })}
           </div>
         </section>
 
-        {/* Partner / Investor Services */}
-        <section className="mt-5">
-          <h3 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
-            For Partners & Investors
-          </h3>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {partnerServices.map(({ title, desc, icon: Icon }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                whileHover={{ scale: 1.05 }}
-                className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <Icon className="w-12 h-12 text-gold mb-5 mx-auto" />
-                <h4 className="text-xl font-semibold mb-3">{title}</h4>
-                <p className="opacity-90">{desc}</p>
-              </motion.div>
-            ))}
+        <section id="partners" className="mt-14">
+          <h2 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
+            For partners and institutions
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {partnerServices.map((service) => {
+              const Icon = service.icon;
+              return (
+                <MotionDiv
+                  key={service.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  whileHover={{ scale: 1.03 }}
+                  className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  <Icon className="w-12 h-12 text-gold mb-5 mx-auto" />
+                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                  <p className="opacity-90">{service.desc}</p>
+                </MotionDiv>
+              );
+            })}
           </div>
         </section>
 
-        {/* Impact Metrics */}
-        <section className="mt-5">
-          <h3 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
-            Roadmap to 2030 🌍
-          </h3>
+        <section id="roadmap-services" className="mt-14">
+          <h2 className="text-3xl font-bold mb-6 text-primary dark:text-gold">
+            Roadmap indicators
+          </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { number: "50,000+", label: "Students Empowered (by 2030)" },
-              { number: "1,000+", label: "Projects & Startups Launched (by 2030)" },
-              { number: "100+", label: "Universities in Roadmap (by 2030)" },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
+              { number: "50,000+", label: "Students supported (2030 target)" },
+              { number: "1,000+", label: "Projects and startups enabled" },
+              { number: "100+", label: "Universities in expansion roadmap" },
+            ].map((stat) => (
+              <MotionDiv
+                key={stat.label}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: i * 0.2 }}
+                transition={{ duration: 0.7 }}
                 viewport={{ once: true }}
                 className="p-8 rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-lg"
               >
-                <h4 className="text-4xl font-extrabold mb-2 text-white dark:text-gold">{stat.number}</h4>
+                <h3 className="text-4xl font-extrabold mb-2 text-white dark:text-gold">
+                  {stat.number}
+                </h3>
                 <p className="text-lg">{stat.label}</p>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
           <p className="mt-6 text-gray-600 dark:text-gray-400 text-sm italic">
-            *These impact projections form part of our 2030 strategic roadmap.
+            These metrics align with the long-term strategic roadmap.
           </p>
         </section>
 
-        {/* Call to Action */}
-        <motion.section
+        <MotionSection
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mt-5 bg-gradient-to-r from-primary to-accent dark:from-dark-navbar dark:to-gold text-white py-10 px-5 rounded-3xl shadow-xl"
+          className="mt-14 bg-gradient-to-r from-primary to-accent dark:from-dark-navbar dark:to-gold text-white py-10 px-5 rounded-3xl shadow-xl"
         >
-          <h3 className="text-4xl md:text-5xl font-extrabold mb-6">
-            Let’s Build the Future, Together 🌍
-          </h3>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+            Build the future with Stratizen
+          </h2>
           <p className="max-w-3xl mx-auto mb-10 text-lg leading-relaxed">
-            Students. Partners. Investors. Stratizen is not just a platform, it’s a{" "}
-            <span className="font-semibold">movement</span> for redefining education, entrepreneurship, and collaboration in Africa and beyond.
+            Students, partners, and institutions are invited to collaborate on
+            trusted digital infrastructure for campus growth.
           </p>
           <div className="flex justify-center gap-6 flex-wrap">
             <a
               href="/contact"
               className="px-8 py-4 rounded-xl font-semibold text-lg bg-white text-primary hover:bg-gray-100 transition-all duration-300 shadow-lg"
             >
-              Contact Us
+              Contact the team
             </a>
             <a
               href="/cta"
               className="px-8 py-4 rounded-xl font-semibold text-lg border border-white text-white hover:bg-white hover:text-primary transition-all duration-300 shadow-lg"
             >
-              Get Started
+              View engagement options
             </a>
           </div>
-        </motion.section>
+        </MotionSection>
       </div>
     </div>
   );
 }
+

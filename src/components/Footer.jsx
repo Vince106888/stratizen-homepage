@@ -5,72 +5,52 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-16 px-6">
       <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-4">
-        {/* Brand */}
         <div>
-          <h2 className="text-2xl font-extrabold text-white mb-4">
-            Stratizen
-          </h2>
+          <h2 className="text-2xl font-extrabold text-white mb-4">Stratizen</h2>
           <p className="text-gray-400 leading-relaxed">
-            Building Africa’s most dynamic student innovation hub — connecting
-            students, partners, and investors in one ecosystem.
+            Student-owned digital infrastructure for collaboration, opportunity,
+            and coordination at Strathmore University.
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-3">
             <li>
-              <a href="/" className="hover:text-accent transition">
-                Home
-              </a>
+              <a href="/" className="hover:text-accent transition">Home</a>
             </li>
             <li>
-              <a href="/about" className="hover:text-accent transition">
-                About Us
-              </a>
+              <a href="/about" className="hover:text-accent transition">About</a>
             </li>
             <li>
-              <a href="/services" className="hover:text-accent transition">
-                Services
-              </a>
+              <a href="/services" className="hover:text-accent transition">Services</a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-accent transition">
-                Contact
-              </a>
+              <a href="/contact" className="hover:text-accent transition">Contact</a>
             </li>
           </ul>
         </div>
 
-        {/* For Students & Partners */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Opportunities</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">Platform</h3>
           <ul className="space-y-3">
             <li>
-              <a href="/marketplace" className="hover:text-accent transition">
-                Student Marketplace
+              <a href="/#features" className="hover:text-accent transition">
+                Platform Highlights
               </a>
             </li>
             <li>
-              <a href="/innovation" className="hover:text-accent transition">
-                Innovation Hub
-              </a>
+              <a href="/#roadmap" className="hover:text-accent transition">Roadmap</a>
             </li>
             <li>
-              <a href="/partners" className="hover:text-accent transition">
-                Partner With Us
-              </a>
+              <a href="/trust" className="hover:text-accent transition">Trust & Charter</a>
             </li>
             <li>
-              <a href="/invest" className="hover:text-accent transition">
-                Investor Access
-              </a>
+              <a href="/privacy" className="hover:text-accent transition">Privacy</a>
             </li>
           </ul>
         </div>
 
-        {/* Contact & Social */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Get in Touch</h3>
           <p className="text-gray-400 mb-4">
@@ -86,32 +66,37 @@ export default function Footer() {
           </p>
           <div className="flex space-x-4 mt-4">
             <a
-              href="#"
+              href="/contact"
               className="p-2 bg-gray-800 rounded-full hover:bg-accent transition"
+              aria-label="Stratizen on Facebook (coming soon)"
             >
               <Facebook className="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="/contact"
               className="p-2 bg-gray-800 rounded-full hover:bg-accent transition"
+              aria-label="Stratizen on Twitter (coming soon)"
             >
               <Twitter className="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="/contact"
               className="p-2 bg-gray-800 rounded-full hover:bg-accent transition"
+              aria-label="Stratizen on LinkedIn (coming soon)"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="/contact"
               className="p-2 bg-gray-800 rounded-full hover:bg-accent transition"
+              aria-label="Stratizen on Instagram (coming soon)"
             >
               <Instagram className="w-5 h-5" />
             </a>
             <a
               href="mailto:info@stratizen.edu"
               className="p-2 bg-gray-800 rounded-full hover:bg-accent transition"
+              aria-label="Email Stratizen"
             >
               <Mail className="w-5 h-5" />
             </a>
@@ -119,12 +104,12 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-500 text-sm">
-        <p>
-          © {new Date().getFullYear()} Stratizen. All rights reserved. | Built
-          for Students, Partners & Investors
-        </p>
+        <p>(c) {new Date().getFullYear()} Stratizen. All rights reserved.</p>
+        <div className="mt-2 flex flex-wrap justify-center gap-4">
+          <a href="/privacy" className="hover:text-accent transition">Privacy</a>
+          <a href="/terms" className="hover:text-accent transition">Terms</a>
+        </div>
       </div>
     </footer>
   );

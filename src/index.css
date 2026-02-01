@@ -36,6 +36,29 @@ html {
   @apply bg-accent text-white;
 }
 
+*:focus-visible {
+  outline: 3px solid rgba(210, 38, 48, 0.45);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 60;
+  padding: 0.75rem 1.25rem;
+  background: #ffffff;
+  color: #002147;
+  border-radius: 9999px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* ===============================
    Layout Containers
 =============================== */

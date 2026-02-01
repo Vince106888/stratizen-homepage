@@ -9,6 +9,9 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 
+const MotionSpan = motion.span;
+const MotionNav = motion.nav;
+
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,23 +41,23 @@ const Header = () => {
     >
       <AnimatePresence initial={false} mode="wait">
         {isDark ? (
-          <motion.span
+          <MotionSpan
             key="sun"
             initial={{ rotate: -90, opacity: 0 }}
             animate={{ rotate: 0, opacity: 1 }}
             exit={{ rotate: 90, opacity: 0 }}
           >
             <SunIcon className="w-5 h-5 text-yellow-400" />
-          </motion.span>
+          </MotionSpan>
         ) : (
-          <motion.span
+          <MotionSpan
             key="moon"
             initial={{ rotate: -90, opacity: 0 }}
             animate={{ rotate: 0, opacity: 1 }}
             exit={{ rotate: 90, opacity: 0 }}
           >
             <MoonIcon className="w-5 h-5 text-gray-800 dark:text-gray-200" />
-          </motion.span>
+          </MotionSpan>
         )}
       </AnimatePresence>
     </button>
@@ -65,7 +68,8 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
-    { name: "CTA", path: "/cta" },
+    { name: "Engage", path: "/cta" },
+    { name: "Trust", path: "/trust" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -77,6 +81,9 @@ const Header = () => {
           src="/logo.png"
           alt="Stratizen Logo"
           className="w-10 h-10 object-contain"
+          width="40"
+          height="40"
+          loading="eager"
         />
         <span className="font-heading font-semibold text-lg">Stratizen</span>
       </Link>
@@ -92,6 +99,7 @@ const Header = () => {
                 ? "text-gold"
                 : "hover:text-accent"
             }`}
+            aria-current={location.pathname === link.path ? "page" : undefined}
           >
             {link.name}
           </Link>
@@ -103,7 +111,7 @@ const Header = () => {
           rel="noopener noreferrer"
           className="px-4 py-1.5 bg-accent text-white rounded-lg hover:bg-gold transition-colors duration-200"
         >
-          Login
+          Pilot Login
         </a>
       </nav>
 
@@ -126,7 +134,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.nav
+          <MotionNav
             key="mobileMenu"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,6 +151,7 @@ const Header = () => {
                     ? "text-gold"
                     : "hover:text-accent"
                 }`}
+                aria-current={location.pathname === link.path ? "page" : undefined}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
@@ -154,9 +163,9 @@ const Header = () => {
               rel="noopener noreferrer"
               className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-gold transition-colors duration-200"
             >
-              Login
+              Pilot Login
             </a>
-          </motion.nav>
+          </MotionNav>
         )}
       </AnimatePresence>
     </header>

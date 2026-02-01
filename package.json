@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
     "lint": "eslint .",
+    "seo:verify": "node scripts/seo-verify.mjs",
     "preview": "vite preview",
     "tailwind": "tailwindcss"
   },
