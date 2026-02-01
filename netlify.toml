@@ -1,6 +1,9 @@
 [build]
   publish = "dist"
 
+# -------------------------------
+# GLOBAL SECURITY HEADERS
+# -------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
@@ -11,6 +14,24 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
+# -------------------------------
+# SEO / AI CRITICAL FILES
+# -------------------------------
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+# -------------------------------
+# STATIC ASSETS (LONG CACHE)
+# -------------------------------
 [[headers]]
   for = "/assets/*"
   [headers.values]
