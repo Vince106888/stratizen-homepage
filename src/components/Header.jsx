@@ -106,7 +106,7 @@ const Header = () => {
         ))}
         <DarkModeButton />
         <a
-          href="https://p2p-student-platform.web.app"
+          href="https://stratizen.africa"
           target="_blank"
           rel="noopener noreferrer"
           className="px-4 py-1.5 bg-accent text-white rounded-lg hover:bg-gold transition-colors duration-200"
@@ -158,7 +158,7 @@ const Header = () => {
               </Link>
             ))}
             <a
-              href="https://p2p-student-platform.web.app"
+              href="https://stratizen.africa"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-gold transition-colors duration-200"
